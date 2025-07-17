@@ -1,5 +1,11 @@
 import discord
 import aiohttp
+import os
+
+# Lấy token từ biến môi trường
+DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
+if not DISCORD_TOKEN:
+    raise ValueError("❌ DISCORD_TOKEN environment variable is not set!")
 
 # Khởi tạo intents với quyền đọc nội dung tin nhắn và file đính kèm
 intents = discord.Intents.default()
@@ -30,12 +36,10 @@ async def on_message(message):
                 await message.channel.send(f"📎 Đang tải file `{attachment.filename}`...")
 
                 try:
-                    # Tải nội dung file bằng HTTP
                     async with aiohttp.ClientSession() as session:
                         async with session.get(attachment.url) as resp:
                             if resp.status == 200:
                                 content = await resp.text()
-                                # Trả về nội dung (giới hạn ký tự nếu quá dài)
                                 if len(content) <= 1900:
                                     await message.channel.send(f"📄 Nội dung file:\n```{content}```")
                                 else:
@@ -45,6 +49,5 @@ async def on_message(message):
                 except Exception as e:
                     await message.channel.send(f"❌ Lỗi khi xử lý file: {e}")
 
-
-# Thay YOUR_BOT_TOKEN bằng token bạn đã copy
-client.run("MTM3NTY0MTk0NzU1Mjg3ODU5Mg.G5wl1W.c_WScR-VHpxOJxd8Y7VDcK0r57ci4xC35zIhIk")
+# Chạy bot
+client.run(DISCORD_TOKEN)
