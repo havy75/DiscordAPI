@@ -47,4 +47,4 @@ async def on_message(message):
 
 
 # Thay YOUR_BOT_TOKEN bằng token bạn đã copy
-client.run("MTM3NTY0MTk0NzU1Mjg3ODU5Mg.GKCEmM.Achw6R8ceuqPOf1GZMY9xnPyG8kS0eG3SLbwag")
+client.run("MTM3NTY0MTk0NzU1Mjg3ODU5Mg.G5wl1W.c_WScR-VHpxOJxd8Y7VDcK0r57ci4xC35zIhIk")
